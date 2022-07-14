@@ -1,16 +1,34 @@
 package com.codedifferently.problem01;
 
+import java.util.*;
+
 public class Solution {
-    /**
-     * You will be given an array of numbers, search the array and return the longest
-     * set of consecutive numbers
-     * example input - {1,3,2,10,6,5,7,8}
-     * return the String "Longest Set: {5 6 7 8}"
-     * Even though 1,2,3 would the first consecutive set 5,6,7,8 is longer
-     * @param allNumbers
-     * @return
-     */
+
+    //sort arr with tree set
+    //iterate through set
+    //check tree set has next number and its consecutive
+    //append to string builder
+    //compare longest to current (if the longest count is less
+    //      than current, our current is new longest)
+    //return string
     public String findLongestConsecutiveSet(Integer[] allNumbers){
-        return null;
+        Set<Integer> sortSet = new TreeSet<>(List.of(allNumbers));
+        int countLongest = 0;
+        String tempLongest = "";
+        for(int n : sortSet){
+                int currentNum = n;
+                int consecutiveNums = 1;
+                StringBuilder tempStr = new StringBuilder(String.valueOf(currentNum));
+                while(sortSet.contains(currentNum+1)){
+                    currentNum+=1;
+                    tempStr.append(" ").append(currentNum);
+                    consecutiveNums +=1;
+                }
+                if(countLongest < consecutiveNums){
+                    countLongest = consecutiveNums;
+                    tempLongest = tempStr.toString();
+                }
+            }
+        return "Longest Set: {" + tempLongest+"}";
     }
 }
